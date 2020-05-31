@@ -29,3 +29,17 @@ export async function createTodo(todoItem: CreateTodoRequest, jwtPayload: string
         dueDate: todoItem.dueDate
       });
 }
+
+export async function getTodoItem(todoId: string): Promise<TodoItem> {
+  logger.info('getTodoItem called.',{
+    todoId
+  });
+  return todoAccess.getTodoItem(todoId);
+}
+
+export async function updateTodoAttachmentUrl(todoItem: TodoItem){
+  logger.info('updateTodoAttachmentUrl is called.',{
+    todoItem
+  });
+  return await todoAccess.updateTodoAttachmentUrl(todoItem);
+}
