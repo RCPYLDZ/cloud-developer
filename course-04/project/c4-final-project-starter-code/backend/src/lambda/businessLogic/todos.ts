@@ -8,8 +8,12 @@ import { parseUserId } from '../../auth/utils';
 const todoAccess = new TodoAccess();
 const logger = createLogger('todos'); 
 
-export async function getAllTodos(): Promise<TodoItem[]> {
-  return todoAccess.getAllTodos();
+export async function getUserAllTodos(jwtPayload: string): Promise<TodoItem[]> {
+  logger.info('getUserAllTodos called.',{
+    jwtPayload
+  });
+  const userId = parseUserId(jwtPayload);
+  return todoAccess.getUserAllTodos(userId);
 }
 
 export async function createTodo(todoItem: CreateTodoRequest, jwtPayload: string ): Promise<TodoItem> {
